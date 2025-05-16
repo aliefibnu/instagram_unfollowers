@@ -263,16 +263,16 @@ pre code {
 }
 
 .accordion-content {
-  display: none;
+  /* display: none; */
   padding: 15px;
   background: var(--accent);
   border: 1px solid var(--neon-cyan);
   border-top: none;
 }
 
-.accordion-content.active {
+/* .accordion-content.active {
   display: block;
-}
+} */
 
 .guide-image {
   max-width: 100%;
