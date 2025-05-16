@@ -1,0 +1,128 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desktop - Instagram Unfollowers</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+  <div class="particle-bg"></div>
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-user-secret"></i> Unfollow Checker
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="https://github.com/aliefibnu/instagram_unfollowers" target="_blank"><i class="fab fa-github"></i> Repo</a></li>
+      <li><a href="https://github.com/aliefibnu" target="_blank"><i class="fab fa-github-alt"></i> My Github</a></li>
+      <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
+    </ul>
+    <div class="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+  <div class="container">
+    <header>
+      <h1 class="neon-text">Desktop Guide</h1>
+      <p class="subtitle">Cek unfollowers di Instagram dengan komputermu!</p>
+    </header>
+    <main>
+      <section class="code-section">
+        <h2>Kode JavaScript</h2>
+        <div class="progress-bar">
+          <div id="progress" class="progress"></div>
+        </div>
+        <pre><code id="code-display" class="language-javascript"></code></pre>
+        <button id="copy-btn" class="btn neon-btn" disabled><i class="fas fa-copy"></i> Copy Kode</button>
+      </section>
+      <section class="guide-section">
+        <h2>Panduan</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header"><i class="fas fa-globe"></i> Buka Instagram</button>
+            <div class="accordion-content">
+              <p>Buka <a href="https://instagram.com" target="_blank">instagram.com</a> di browser.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header"><i class="fas fa-tools"></i> Buka Konsol</button>
+            <div class="accordion-content">
+              <p>Buka konsol di developer mode (Ctrl + Shift + I).</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header"><i class="fas fa-paste"></i> Paste Kode</button>
+            <div class="accordion-content">
+              <p>Paste kode yang sudah kamu copy dari atas.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header"><i class="fas fa-lock-open"></i> Allow Paste</button>
+            <div class="accordion-content">
+              <p>Jika tidak bisa paste, ketik <code>allow paste</code> lalu enter.</p>
+            </div>
+          </div>
+        </div>
+        <div class="video-tutorial">
+          <h3>Video Tutorial</h3>
+          <iframe src="https://www.youtube.com/embed/placeholder" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </section>
+    </main>
+    <a href="index.html" class="btn back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Informasi</h2>
+      <p id="modal-message"></p>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="desktop.js"></script>
+</body>
+</html>
