@@ -127,6 +127,9 @@ function getUserCard() {
               ${user.follows_viewer ? "Mengikuti Anda" : "Tidak Mengikuti"}
             </span>
           </div>
+          <button class="unfollow-button" data-user-id="${
+            user.id
+          }">Unfollow</button>
         </div>
       </div>`
   );
@@ -135,7 +138,8 @@ function getUserCard() {
 function rewriteBody() {
   const style = `
     <style>
-      * {
+
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -375,6 +379,50 @@ function rewriteBody() {
           font-size: 1rem;
         }
       }
+
+      .unfollow-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #ff6666, #cc3333);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .unfollow-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .unfollow-button:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+
+      .unfollow-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #ff6666, #cc3333);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .unfollow-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .unfollow-button:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
     </style>
   `;
 
@@ -420,13 +468,70 @@ function rewriteBody() {
     </div>
   `;
 
-  // Add event listeners for buttons
+  // Add event listeners for menu buttons
   document.querySelectorAll(".menu-button").forEach((button) => {
     button.addEventListener("click", () => {
       filterState = button.getAttribute("data-filter");
       rewriteBody();
     });
   });
+
+  // Add event listeners for unfollow buttons with confirmation
+  document.querySelectorAll(".unfollow-button").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const userId = button.getAttribute("data-user-id");
+      const username = button
+        .closest(".user-card")
+        .querySelector(".username")
+        .textContent.trim();
+      const confirmUnfollow = window.confirm(
+        `Apakah Anda yakin ingin berhenti mengikuti ${username}?`
+      );
+      if (!confirmUnfollow) {
+        return; // Stop if user cancels
+      }
+      button.disabled = true; // Disable button to prevent multiple clicks
+      try {
+        await unfollow(userId);
+        button.textContent = "Unfollowed";
+      } catch (error) {
+        console.error("Failed to unfollow:", error.message);
+        button.textContent = "Error";
+      }
+    });
+  });
+}
+
+async function unfollow(userId) {
+  try {
+    const response = await fetch(`/web/friendships/${userId}/unfollow/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": getCookie("csrftoken"),
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    if (json.status !== "ok") {
+      throw new Error("Failed to unfollow user");
+    }
+
+    // Update results to reflect unfollowed user
+    results = results.filter((user) => user.id !== userId);
+    fetchedCount = results.length;
+    percentage = Math.floor((fetchedCount / totalCount) * 100);
+    unfollowLog.push(userId); // Log unfollowed user
+    await sleep(DEFAULT_TIME_BETWEEN_UNFOLLOWS); // Respect unfollow delay
+    rewriteBody(); // Refresh UI
+  } catch (error) {
+    throw new Error(`Unfollow failed: ${error.message}`);
+  }
 }
 
 window.rewriteBody = rewriteBody;
@@ -446,12 +551,8 @@ async function main() {
         hasNextPage: nextPage,
         nextCursor,
       } = await fetchData(cursor);
-      console.log(
-        `Fetched ${results_now.length} users, Total: ${fetchedCount}, Progress: ${percentage}%`
-      );
       cursor = nextCursor;
     }
-    console.log("Finished fetching all followings:", results);
     status_now = "completed";
   } catch (error) {
     console.error("Error in main:", error.message);
