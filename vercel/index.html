@@ -1,79 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayo Lihat Siapa yang Unfollow Kamu!</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-</head>
-<body>
-  <div class="particle-bg"></div>
-  <nav class="navbar">
-    <div class="logo">
-      <i class="fas fa-user-secret"></i> Unfollow Checker
-    </div>
-    <ul class="nav-links">
-      <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="#how-it-works"><i class="fas fa-info-circle"></i> How It Works</a></li>
-      <li><a href="https://github.com/aliefibnu/instagram_unfollowers" target="_blank"><i class="fab fa-github"></i> Repo</a></li>
-      <li><a href="https://github.com/aliefibnu" target="_blank"><i class="fab fa-github-alt"></i> My Github</a></li>
-      <li><button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button></li>
-    </ul>
-    <div class="hamburger">
-      <i class="fas fa-bars"></i>
-    </div>
-  </nav>
-  <div class="container">
-    <section id="home">
-      <header>
-        <h1 class="neon-text">Ayo Lihat Siapa yang Unfollow Kamu!</h1>
-        <p class="subtitle">Temukan siapa yang unfollow Instagram-mu dengan antarmuka futuristik!</p>
-      </header>
-      <div class="menu">
-        <h2>Pilih Perangkatmu</h2>
-        <div class="button-group">
-          <a href="mobile.html" class="btn neon-btn"><i class="fas fa-mobile-alt"></i> Handphone</a>
-          <a href="desktop.html" class="btn neon-btn"><i class="fas fa-desktop"></i> Desktop</a>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayo Lihat Siapa yang Unfollow Kamu!</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+  </head>
+  <body>
+    <div class="particle-bg"></div>
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-user-secret"></i> Unfollow Checker
       </div>
-    </section>
-    <section id="how-it-works">
-      <h2 class="section-title">Cara Kerjanya</h2>
-      <div class="carousel">
-        <div class="carousel-item">
-          <i class="fas fa-code"></i>
-          <h3>Ambil Kode</h3>
-          <p>Copy kode JavaScript dari halaman mobile atau desktop.</p>
-        </div>
-        <div class="carousel-item">
-          <i class="fab fa-instagram"></i>
-          <h3>Jalankan di Instagram</h3>
-          <p>Paste kode di browser sesuai panduan perangkatmu.</p>
-        </div>
-        <div class="carousel-item">
-          <i class="fas fa-list"></i>
-          <h3>Lihat Hasil</h3>
-          <p>Tunggu proses selesai dan lihat daftar unfollowers!</p>
-        </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a href="#how-it-works"
+            ><i class="fas fa-info-circle"></i> How It Works</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://github.com/aliefibnu/instagram_unfollowers"
+            target="_blank"
+            ><i class="fab fa-github"></i> Repo</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/aliefibnu" target="_blank"
+            ><i class="fab fa-github-alt"></i> My Github</a
+          >
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
       </div>
-    </section>
-    <div class="social-share">
-      <h3>Bagikan ke Temanmu!</h3>
-      <a href="https://twitter.com/intent/tweet?text=Check%20who%20unfollowed%20you%20on%20Instagram!&url=yourwebsite.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    </nav>
+    <div class="container">
+      <section id="home">
+        <header>
+          <h1 class="neon-text">Ayo Lihat Siapa yang Unfollow Kamu!</h1>
+          <p class="subtitle">
+            Temukan siapa yang unfollow Instagram-mu dengan antarmuka
+            futuristik!
+          </p>
+        </header>
+        <div class="menu">
+          <h2>Pilih Perangkatmu</h2>
+          <div class="button-group">
+            <a href="mobile.html" class="btn neon-btn"
+              ><i class="fas fa-mobile-alt"></i> Handphone</a
+            >
+            <a href="desktop.html" class="btn neon-btn"
+              ><i class="fas fa-desktop"></i> Desktop</a
+            >
+          </div>
+        </div>
+      </section>
+      <section id="how-it-works">
+        <h2 class="section-title">Cara Kerjanya</h2>
+        <div class="carousel">
+          <div class="carousel-item">
+            <i class="fas fa-code"></i>
+            <h3>Ambil Kode</h3>
+            <p>Copy kode JavaScript dari halaman mobile atau desktop.</p>
+          </div>
+          <div class="carousel-item">
+            <i class="fab fa-instagram"></i>
+            <h3>Jalankan di Instagram</h3>
+            <p>Paste kode di browser sesuai panduan perangkatmu.</p>
+          </div>
+          <div class="carousel-item">
+            <i class="fas fa-list"></i>
+            <h3>Lihat Hasil</h3>
+            <p>Tunggu proses selesai dan lihat daftar unfollowers!</p>
+          </div>
+        </div>
+      </section>
+      <div class="social-share">
+        <h3>Bagikan ke Temanmu!</h3>
+        <a
+          href="https://twitter.com/intent/tweet?text=Check%20who%20unfollowed%20you%20on%20Instagram!&url=yourwebsite.com"
+          target="_blank"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+      </div>
     </div>
-  </div>
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Informasi</h2>
-      <p id="modal-message"></p>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Informasi</h2>
+        <p id="modal-message"></p>
+      </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="script.js"></script>
-</body>
-  </html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

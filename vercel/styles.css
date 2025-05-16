@@ -13,7 +13,7 @@ body {
   padding: 0;
   background: var(--bg-dark);
   color: var(--text-dark);
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -47,7 +47,7 @@ body.light {
 }
 
 .logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 1.5rem;
   color: var(--neon-cyan);
   text-shadow: 0 0 5px var(--neon-cyan);
@@ -64,14 +64,16 @@ body.light {
   margin-left: 20px;
 }
 
-.nav-links a, .theme-btn {
+.nav-links a,
+.theme-btn {
   color: var(--text-dark);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--neon-pink);
   text-shadow: 0 0 5px var(--neon-pink);
 }
@@ -96,7 +98,7 @@ body.light {
 }
 
 .neon-text {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 3rem;
   color: var(--neon-cyan);
   text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-pink);
@@ -112,7 +114,7 @@ body.light {
 }
 
 .menu h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: var(--neon-pink);
   text-align: center;
 }
@@ -126,7 +128,7 @@ body.light {
 
 .btn {
   padding: 12px 24px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: 1rem;
   text-decoration: none;
   border: 2px solid var(--neon-cyan);
@@ -157,7 +159,7 @@ body.light {
 }
 
 .section-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: var(--neon-pink);
   text-align: center;
   margin: 40px 0 20px;
@@ -252,7 +254,7 @@ pre code {
   background: var(--accent);
   border: 1px solid var(--neon-cyan);
   color: var(--neon-cyan);
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   text-align: left;
   cursor: pointer;
   display: flex;
@@ -318,13 +320,22 @@ pre code {
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes particles {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 100px; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
 }
 
 @media (max-width: 768px) {
